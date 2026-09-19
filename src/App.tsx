@@ -1,11 +1,11 @@
-import { Route, Routes } from 'react-router-dom'
-import { Header } from './components/Header'
-import { CreateEventPage } from './pages/CreateEventPage'
-import { EventPage } from './pages/EventPage'
-import { HomePage } from './pages/HomePage'
-import { ModerationPage } from './pages/ModerationPage'
-import { NotFoundPage } from './pages/NotFoundPage'
-import { TicketPage } from './pages/TicketPage'
+import { Route, Routes } from "react-router-dom";
+import { Header } from "./components/Header";
+import { CreateEventPage } from "./pages/CreateEventPage";
+import { EventPage } from "./pages/EventPage";
+import { HomePage } from "./pages/HomePage";
+import { ModerationPage } from "./pages/ModerationPage";
+import { NotFoundPage } from "./pages/NotFoundPage";
+import { TicketPage } from "./pages/TicketPage";
 
 function App() {
   return (
@@ -20,7 +20,7 @@ function App() {
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

@@ -1,20 +1,36 @@
-import { Button, Card, CardActions, CardContent, Typography } from '@mui/material'
-import { Link as RouterLink } from 'react-router-dom'
-import type { Event } from '../types/event'
+import { Button } from "@mui/material";
+import { Link as RouterLink } from "react-router-dom";
+import type { Event } from "../types/event";
 
-type EventCardProps = { event: Event }
+type EventCardProps = { event: Event };
 
 export function EventCard({ event }: EventCardProps) {
   return (
-    <Card>
-      <CardContent>
-        <Typography variant="h6">{event.title}</Typography>
-        <Typography color="text.secondary">{event.date} · {event.time}</Typography>
-        <Typography sx={{ mt: 1 }}>{event.place}</Typography>
-      </CardContent>
-      <CardActions>
-        <Button component={RouterLink} to={`/events/${event.id}`} size="small">Подробнее</Button>
-      </CardActions>
-    </Card>
-  )
+    <article className="event-card">
+      <div className={`event-poster ${event.posterClass}`}>
+        <span>{event.category}</span>
+        <strong>{event.title}</strong>
+      </div>
+      <div className="event-card-body">
+        <div className="date-badge">
+          <b>{event.date.split(" ")[0]}</b>
+          <span>{event.date.split(" ")[1]?.toUpperCase()}</span>
+          <small>{event.day}</small>
+        </div>
+        <div className="event-card-info">
+          <h2>{event.title}</h2>
+          <p>{event.description}</p>
+          <p className="event-place">{event.place}</p>
+        </div>
+      </div>
+      <Button
+        component={RouterLink}
+        to={`/events/${event.id}`}
+        variant="contained"
+        fullWidth
+      >
+        Подробнее
+      </Button>
+    </article>
+  );
 }

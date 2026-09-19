@@ -1,8 +1,12 @@
 export type Event = {
-  id: number
-  title: string
-  date: string
-  time: string
-  place: string
-  description: string
-}
+  id: number;
+  title: string;
+  date: string;
+  day: string;
+  time: string;
+  place: string;
+  address: string;
+  category: string;
+  description: string;
+  posterClass: string;
+};

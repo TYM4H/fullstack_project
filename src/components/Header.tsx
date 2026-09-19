@@ -1,19 +1,36 @@
-import { AppBar, Box, Button, Toolbar, Typography } from '@mui/material'
-import { Link as RouterLink } from 'react-router-dom'
+import { Button } from "@mui/material";
+import { Link as RouterLink, useLocation } from "react-router-dom";
+
+const links = [
+  { label: "События", to: "/" },
+  { label: "Создать", to: "/create-event" },
+  { label: "Модерация", to: "/moderation" },
+];
 
 export function Header() {
+  const { pathname } = useLocation();
   return (
-    <AppBar position="static">
-      <Toolbar sx={{ gap: 1, flexWrap: 'wrap' }}>
-        <Typography component={RouterLink} to="/" variant="h6" sx={{ color: 'inherit', flexGrow: 1, textDecoration: 'none' }}>
-          Афиша событий
-        </Typography>
-        <Box>
-          <Button color="inherit" component={RouterLink} to="/">События</Button>
-          <Button color="inherit" component={RouterLink} to="/create-event">Создать</Button>
-          <Button color="inherit" component={RouterLink} to="/moderation">Модерация</Button>
-        </Box>
-      </Toolbar>
-    </AppBar>
-  )
+    <header className="site-header">
+      <RouterLink className="brand" to="/">Афиша событий</RouterLink>
+      <nav className="main-nav" aria-label="Основная навигация">
+        {links.map((link) => (
+          <RouterLink
+            className={pathname === link.to ? "nav-link active" : "nav-link"}
+            key={link.to}
+            to={link.to}
+          >
+            {link.label}
+          </RouterLink>
+        ))}
+      </nav>
+      <Button
+        className="header-action"
+        component={RouterLink}
+        to="/create-event"
+        variant="contained"
+      >
+        Создать событие
+      </Button>
+    </header>
+  );
 }
