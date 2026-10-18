@@ -11,13 +11,16 @@ export function Header() {
   const { pathname } = useLocation();
   return (
     <header className="site-header">
-      <RouterLink className="brand" to="/">Афиша событий</RouterLink>
+      <RouterLink className="brand" to="/">
+        Афиша событий
+      </RouterLink>
       <nav className="main-nav" aria-label="Основная навигация">
         {links.map((link) => (
           <RouterLink
             className={pathname === link.to ? "nav-link active" : "nav-link"}
             key={link.to}
             to={link.to}
+            aria-current={pathname === link.to ? "page" : undefined}
           >
             {link.label}
           </RouterLink>

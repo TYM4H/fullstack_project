@@ -22,7 +22,7 @@ p {
   background: linear-gradient(110deg, #19235f, #2e2974);
   display: flex;
   align-items: center;
-  padding: 0 calc((100% - 1340px) / 2);
+  padding: 0 max(24px, calc((100% - 1200px) / 2));
   gap: 48px;
   color: #fff;
 }
@@ -82,22 +82,6 @@ p {
 .lead {
   font-size: 18px;
   color: #686c8e;
-}
-.search-box {
-  margin: 28px 0 18px;
-  background: #fff;
-  border-radius: 16px;
-  box-shadow: 0 8px 25px #28245a0d;
-  padding: 20px;
-  font-size: 17px;
-  color: #8b8da5;
-  display: flex;
-  gap: 14px;
-}
-.search-box b {
-  margin-left: auto;
-  color: #24274e;
-  font-size: 14px;
 }
 .chips {
   display: flex;
@@ -295,9 +279,9 @@ p {
 }
 .steps {
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
   gap: 40px;
-  margin: -70px 0 35px;
+  margin: 24px 0 30px;
   color: #777b9a;
 }
 .steps b {
@@ -334,18 +318,6 @@ p {
 .drop-zone .MuiButton-root {
   margin-top: 25px;
   text-transform: none;
-}
-.fake-poster {
-  margin-top: 26px;
-  background: linear-gradient(150deg, #201048, #da4e8b, #0c0c25);
-  width: 145px;
-  height: 180px;
-  border-radius: 10px;
-  color: #fff;
-  font-size: 25px;
-  font-weight: 800;
-  padding: 20px;
-  text-align: left;
 }
 .form-card {
   padding: 30px;
@@ -393,7 +365,7 @@ p {
 }
 .moderation-item {
   display: grid;
-  grid-template-columns: 70px 1.1fr 0.6fr 1.2fr auto auto;
+  grid-template-columns: 70px minmax(0, 1fr) auto;
   align-items: center;
   gap: 14px;
   padding: 15px 0;
@@ -486,15 +458,6 @@ p {
   font-size: 24px;
   display: block;
   margin: 8px 0;
-}
-.qr-code {
-  width: 132px;
-  height: 132px;
-  background:
-    repeating-linear-gradient(90deg, #111 0 8px, #fff 8px 15px),
-    repeating-linear-gradient(#111 0 9px, #fff 9px 18px);
-  border: 8px solid #fff;
-  outline: 5px solid #111;
 }
 .ticket-help {
   background: #fff;
@@ -603,10 +566,6 @@ p {
   .moderation-item {
     grid-template-columns: 60px 1fr auto;
   }
-  .moderation-item > div:nth-of-type(2),
-  .moderation-item > div:nth-of-type(3) {
-    display: none;
-  }
   .details-side {
     padding: 0;
   }
@@ -643,5 +602,337 @@ p {
   }
   .not-found h1 {
     font-size: 30px;
+  }
+}
+
+/* Динамические состояния и интерактивные элементы лабораторной №3. */
+.page-content {
+  animation: appear 240ms ease-out;
+}
+.event-filters {
+  margin-top: 24px;
+}
+.event-filters .chips {
+  margin: 16px 0 8px;
+}
+.list-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 36px;
+}
+.list-heading h2 {
+  margin: 0;
+  font-size: 24px;
+}
+.list-heading span {
+  color: #606581;
+}
+.event-grid {
+  margin-top: 20px;
+}
+.event-card {
+  display: flex;
+  flex-direction: column;
+  animation: appear 220ms ease-out;
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+.event-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px #29275b24;
+}
+.event-card-body {
+  flex: 1;
+}
+.event-card-info h2,
+.event-card-info p,
+.details-side h1,
+.moderation-info,
+.ticket-top strong {
+  overflow-wrap: anywhere;
+}
+.date-badge {
+  flex-shrink: 0;
+}
+.event-poster,
+.details-poster {
+  position: relative;
+  isolation: isolate;
+}
+.event-poster strong,
+.details-poster strong {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+.poster-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+.event-poster:has(.poster-image)::after,
+.details-poster:has(.poster-image)::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(#0006, #000a);
+  z-index: -1;
+}
+.event-poster:has(.poster-image),
+.details-poster:has(.poster-image) {
+  color: white;
+}
+.data-state {
+  padding: 48px 24px;
+  margin: 20px 0;
+  background: #fff;
+  border-radius: 18px;
+  text-align: center;
+  animation: appear 200ms ease-out;
+}
+.data-state p {
+  color: #606581;
+  margin: 16px 0 0;
+  line-height: 1.6;
+}
+.data-state-error {
+  margin: 24px 0;
+}
+.demo-controls {
+  margin: 32px 0 0;
+  border-top: 1px solid #dcdaed;
+  padding-top: 20px;
+  color: #626785;
+  font-size: 14px;
+}
+.demo-controls summary {
+  cursor: pointer;
+  width: fit-content;
+  font-weight: 700;
+}
+.demo-controls p {
+  max-width: 740px;
+  line-height: 1.6;
+  margin-top: 16px;
+}
+.button-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.steps {
+  padding-left: 20px;
+  line-height: 1.5;
+  font-weight: 700;
+}
+.drop-zone {
+  cursor: default;
+  align-self: start;
+  min-height: 440px;
+}
+.drop-zone .MuiAlert-root {
+  margin-top: 18px;
+  text-align: left;
+}
+.poster-preview {
+  max-height: 300px;
+  max-width: 100%;
+  object-fit: contain;
+  border-radius: 12px;
+  margin-top: 24px;
+}
+.file-name {
+  overflow-wrap: anywhere;
+  max-width: 100%;
+  font-size: 13px;
+  margin: 12px 0 0;
+}
+.upload-note {
+  font-size: 13px;
+  margin: 24px 0 0;
+  line-height: 1.6;
+}
+.form-title {
+  align-items: start;
+}
+.form-title h2 {
+  font-size: 23px;
+  margin-bottom: 0;
+}
+.form-title span {
+  max-width: 110px;
+  text-align: right;
+}
+.form-card .muted {
+  margin-top: 0;
+}
+.save-success {
+  padding: 40px;
+  border-radius: 20px !important;
+  animation: appear 260ms ease-out;
+}
+.save-success h2 {
+  margin-top: 20px;
+}
+.save-success p {
+  line-height: 1.6;
+  color: #606581;
+}
+.moderation-layout {
+  grid-template-columns: minmax(0, 1fr) 280px;
+  margin-top: 20px;
+  align-items: start;
+}
+.moderation-info h2 {
+  font-size: 18px;
+  margin: 0;
+}
+.moderation-item p {
+  font-size: 13px;
+  line-height: 1.5;
+  color: #606581;
+}
+.moderation-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.moderation-item .rejection-reason {
+  color: #b3261e;
+  margin-top: 10px;
+}
+.mini-poster {
+  overflow: hidden;
+}
+.mini-poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.checklist {
+  margin-top: 0;
+}
+.ticket-number {
+  font-size: 16px !important;
+  overflow-wrap: anywhere;
+}
+.ticket-help h2 {
+  font-size: 36px;
+  margin: 18px 0;
+}
+.ticket-help .how-to h2 {
+  font-size: 20px;
+  margin-top: 0;
+}
+.ticket-buttons {
+  display: grid;
+  gap: 12px;
+}
+.paid {
+  display: inline-block;
+  line-height: 1.5;
+}
+.about-card p {
+  white-space: pre-line;
+}
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (max-width: 1000px) {
+  .moderation-layout {
+    grid-template-columns: 1fr;
+  }
+  .checklist {
+    margin-top: 0;
+  }
+}
+@media (max-width: 550px) {
+  .moderation-item {
+    grid-template-columns: 50px minmax(0, 1fr);
+  }
+  .moderation-actions,
+  .moderation-item > .MuiChip-root {
+    grid-column: 2;
+  }
+  .moderation-actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .drop-zone,
+  .form-card {
+    padding: 22px;
+  }
+  .form-title {
+    flex-direction: column;
+  }
+  .form-title span {
+    max-width: none;
+    text-align: left;
+  }
+  .steps {
+    gap: 8px 28px;
+    font-size: 13px;
+  }
+  .details-poster {
+    height: 330px;
+  }
+  .details-poster strong,
+  .details-side h1 {
+    font-size: 36px;
+  }
+  .ticket-help h2 {
+    font-size: 30px;
+  }
+  .ticket-top strong {
+    font-size: 32px;
+  }
+  .save-success {
+    padding: 24px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+@media print {
+  body {
+    background: white;
+  }
+  .site-header,
+  main > .MuiButton-root,
+  .ticket-help {
+    display: none !important;
+  }
+  .ticket-layout {
+    display: block;
+    padding: 0;
+  }
+  .ticket {
+    max-width: 600px;
+    margin: auto;
+    box-shadow: none;
+    border: 1px solid #aaa;
+    break-inside: avoid;
+  }
+  .ticket-top {
+    print-color-adjust: exact;
+    -webkit-print-color-adjust: exact;
   }
 }
