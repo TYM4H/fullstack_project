@@ -6,10 +6,7 @@ import {
   type ReactNode,
 } from "react";
 import { EventsContext } from "../../entities/event/model/context";
-import {
-  eventRepository,
-  type LoadMode,
-} from "../../entities/event/model/repository";
+import { eventRepository } from "../../entities/event/model/repository";
 import type {
   Event,
   EventDraft,
@@ -28,12 +25,12 @@ export function EventsProvider({ children }: { children: ReactNode }) {
   );
   const [error, setError] = useState("");
   const request = useRef(0);
-  const reload = useCallback(async (mode: LoadMode = "normal") => {
+  const reload = useCallback(async () => {
     const current = ++request.current;
     setStatus("loading");
     setError("");
     try {
-      const database = await eventRepository.load(mode);
+      const database = await eventRepository.load();
       if (current === request.current) {
         setData(database);
         setStatus("success");

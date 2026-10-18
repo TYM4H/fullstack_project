@@ -7,7 +7,6 @@ import { ModerationActions } from "../features/moderate-event/ModerationActions"
 import { formatEventDate } from "../shared/lib/date";
 import { PageContainer } from "../shared/ui/PageContainer";
 import { DataState } from "../shared/ui/DataState";
-import { DemoControls } from "../shared/ui/DemoControls";
 
 export function ModerationPage() {
   const { events, status, error, reload } = useEvents();
@@ -20,8 +19,7 @@ export function ModerationPage() {
         <p className="eyebrow">РАБОЧАЯ ЗОНА</p>
         <h1>Модерация событий</h1>
         <p className="lead">
-          Проверьте информацию перед публикацией. В учебном режиме роли доступны
-          без авторизации.
+          Проверьте информацию о событиях перед публикацией.
         </p>
       </div>
       {message && (
@@ -123,7 +121,6 @@ export function ModerationPage() {
           </aside>
         </div>
       </DataState>
-      <DemoControls onLoad={(mode) => void reload(mode)} />
     </PageContainer>
   );
 }

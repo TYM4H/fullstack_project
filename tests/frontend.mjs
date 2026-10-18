@@ -88,20 +88,33 @@ try {
     },
   );
   await check(
-    "Демонстрация пустого списка, ошибки и восстановления данных",
+    "Пустое хранилище, ошибка чтения и восстановление данных",
     async () => {
-      await page
-        .getByText("Демонстрация состояний данных", { exact: true })
-        .click();
-      await page
-        .getByRole("button", { name: "Пустой список", exact: true })
-        .click();
+      // Нужные состояния задаются только в изолированном тестовом профиле.
+      const saved = await page.evaluate(() =>
+        localStorage.getItem("afisha:demo:v1"),
+      );
+      await page.evaluate(() =>
+        localStorage.setItem(
+          "afisha:demo:v1",
+          JSON.stringify({ version: 1, events: [], tickets: [] }),
+        ),
+      );
+      await page.reload();
       await visible("События не найдены");
+      await page.evaluate(() =>
+        localStorage.setItem("afisha:demo:v1", "{broken"),
+      );
+      await page.reload();
       await page
-        .getByRole("button", { name: "Ошибка загрузки", exact: true })
-        .click();
-      await page.getByRole("button", { name: "Повторить загрузку" }).waitFor();
+        .getByRole("alert")
+        .filter({ hasText: "Сохранённые данные повреждены" })
+        .waitFor();
       await shot("error-state");
+      await page.evaluate((saved) => {
+        if (saved === null) localStorage.removeItem("afisha:demo:v1");
+        else localStorage.setItem("afisha:demo:v1", saved);
+      }, saved);
       await page.getByRole("button", { name: "Повторить загрузку" }).click();
       await cardCount(3);
     },
@@ -365,15 +378,15 @@ try {
     },
   );
   await check(
-    "Повреждённое хранилище отображает ошибку, восстановление возможно после исправления",
+    "Неподдерживаемый формат хранилища отображает ошибку и позволяет восстановление",
     async () => {
       await page.evaluate(() =>
-        localStorage.setItem("afisha:demo:v1", "{broken"),
+        localStorage.setItem("afisha:demo:v1", JSON.stringify({ version: 2 })),
       );
       await go("/");
       await page
         .getByRole("alert")
-        .filter({ hasText: "Сохранённые данные повреждены" })
+        .filter({ hasText: "Формат сохранённых данных не поддерживается" })
         .waitFor();
       await page.evaluate(() => localStorage.removeItem("afisha:demo:v1"));
       await page.getByRole("button", { name: "Повторить загрузку" }).click();

@@ -703,23 +703,6 @@ p {
 .data-state-error {
   margin: 24px 0;
 }
-.demo-controls {
-  margin: 32px 0 0;
-  border-top: 1px solid #dcdaed;
-  padding-top: 20px;
-  color: #626785;
-  font-size: 14px;
-}
-.demo-controls summary {
-  cursor: pointer;
-  width: fit-content;
-  font-weight: 700;
-}
-.demo-controls p {
-  max-width: 740px;
-  line-height: 1.6;
-  margin-top: 16px;
-}
 .button-row {
   display: flex;
   gap: 12px;

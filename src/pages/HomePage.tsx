@@ -5,7 +5,6 @@ import { useEvents } from "../entities/event/model/context";
 import { EventFilters } from "../features/filter-events/EventFilters";
 import { PageContainer } from "../shared/ui/PageContainer";
 import { DataState } from "../shared/ui/DataState";
-import { DemoControls } from "../shared/ui/DemoControls";
 
 export function HomePage() {
   const { events, status, error, reload } = useEvents();
@@ -82,7 +81,6 @@ export function HomePage() {
           ))}
         </section>
       </DataState>
-      <DemoControls onLoad={(mode) => void reload(mode)} />
     </PageContainer>
   );
 }

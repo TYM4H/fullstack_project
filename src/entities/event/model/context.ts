@@ -1,14 +1,13 @@
 import { createContext, useContext } from "react";
 import type { Event, EventDraft, EventStatus } from "./types";
 import type { Ticket } from "../../ticket/types";
-import type { LoadMode } from "./repository";
 
 export type EventsState = {
   events: Event[];
   tickets: Ticket[];
   status: "loading" | "success" | "error";
   error: string;
-  reload: (mode?: LoadMode) => Promise<void>;
+  reload: () => Promise<void>;
   createEvent: (draft: EventDraft) => Promise<void>;
   moderateEvent: (
     id: string,

@@ -9,7 +9,6 @@ import type { Ticket } from "../../ticket/types";
 
 export const storageKey = "afisha:demo:v1";
 type Database = { version: 1; events: Event[]; tickets: Ticket[] };
-export type LoadMode = "normal" | "empty" | "error";
 const wait = () => new Promise<void>((resolve) => setTimeout(resolve, 400));
 
 function isRecord(value: unknown): value is Record<string, unknown> {
@@ -94,16 +93,9 @@ function write(database: Database) {
   }
 }
 export const eventRepository = {
-  async load(mode: LoadMode = "normal"): Promise<Database> {
+  async load(): Promise<Database> {
     await wait();
-    if (mode === "error")
-      throw new Error(
-        "Демонстрационная ошибка загрузки. Нажмите «Повторить загрузку» для восстановления.",
-      );
-    const database = read();
-    return mode === "empty"
-      ? { ...database, events: [], tickets: [] }
-      : database;
+    return read();
   },
   async create(draft: EventDraft): Promise<Database> {
     await wait();

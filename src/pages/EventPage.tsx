@@ -63,10 +63,7 @@ export function EventPage() {
                   {event.rejectionReason && `: ${event.rejectionReason}`}
                 </Alert>
               )}
-              <small className="muted">
-                Учебный билет оформляется бесплатно. Реальные оплата и контроль
-                входа не подключены.
-              </small>
+              <small className="muted">Билет оформляется бесплатно.</small>
             </aside>
           </div>
         )}

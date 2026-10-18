@@ -12,7 +12,7 @@ export function TicketPage() {
   const formatted = ticket ? formatEventDate(ticket.event.startsAt) : null;
   function download() {
     if (!ticket || !formatted) return;
-    const content = `УЧЕБНЫЙ БИЛЕТ\n${ticket.event.title}\n${formatted.date} · ${formatted.time} МСК\n${ticket.event.place}\n${ticket.event.address}\nНомер: ${ticket.id}\nОформлен: ${new Date(ticket.issuedAt).toLocaleString("ru-RU", { timeZone: "Europe/Moscow" })} МСК\nДемонстрация: не является действительным входным билетом.\n`;
+    const content = `БИЛЕТ\n${ticket.event.title}\n${formatted.date} · ${formatted.time} МСК\n${ticket.event.place}\n${ticket.event.address}\nНомер: ${ticket.id}\nОформлен: ${new Date(ticket.issuedAt).toLocaleString("ru-RU", { timeZone: "Europe/Moscow" })} МСК\n`;
     const url = URL.createObjectURL(
       new Blob([content], { type: "text/plain;charset=utf-8" }),
     );
@@ -42,7 +42,7 @@ export function TicketPage() {
           <div className="ticket-layout">
             <article className="ticket">
               <div className={`ticket-top ${ticket.event.posterClass}`}>
-                <span>АФИША СОБЫТИЙ · УЧЕБНЫЙ БИЛЕТ</span>
+                <span>АФИША СОБЫТИЙ · БИЛЕТ</span>
                 <strong>{ticket.event.title}</strong>
               </div>
               <div className="ticket-info">
@@ -57,14 +57,14 @@ export function TicketPage() {
                 <div>
                   <span>Номер билета</span>
                   <b className="ticket-number">{ticket.id}</b>
-                  <small>Бесплатный демонстрационный билет</small>
+                  <small>Бесплатный билет</small>
                 </div>
               </div>
             </article>
             <aside className="ticket-help">
               <span className="success-icon">Готово</span>
               <h2>Билет оформлен!</h2>
-              <b className="paid">Учебное оформление · бесплатно</b>
+              <b className="paid">Бесплатное оформление</b>
               <p>
                 Скачайте данные билета или сохраните печатную версию через
                 диалог печати браузера.
@@ -74,10 +74,6 @@ export function TicketPage() {
                 <p>
                   Данные соответствуют выбранному событию. Повторное оформление
                   возвращает тот же билет.
-                </p>
-                <p>
-                  Оплата, действующий QR-код и проверка на входе будут добавлены
-                  при интеграции с сервером.
                 </p>
               </div>
               <div className="ticket-buttons">
